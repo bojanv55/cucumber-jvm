@@ -41,7 +41,7 @@ class FeatureResolverTest {
         EngineDiscoveryRequest discoveryRequest = new EmptyEngineDiscoveryRequest(configuration);
         id = UniqueId.forEngine(engine.getId());
         testDescriptor = engine.discover(discoveryRequest, id);
-        FeatureResolver featureResolver = createFeatureResolver(testDescriptor, x -> included("include everything"));
+        FeatureResolver featureResolver = createFeatureResolver(testDescriptor, );
         featureResolver.resolveClasspathResource(selectClasspathResource(featurePath));
     }
 

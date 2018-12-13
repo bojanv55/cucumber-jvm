@@ -2,7 +2,6 @@ package io.cucucumber.jupiter.engine.resource;
 
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
-import org.junit.platform.commons.util.ClassFilter;
 import org.junit.platform.commons.util.PackageUtils;
 import org.junit.platform.commons.util.Preconditions;
 
@@ -54,6 +53,14 @@ class ClasspathScanner {
 
     private static boolean isNotModuleInfo(Path path) {
         return !path.endsWith(MODULE_INFO_FILE_NAME);
+    }
+
+    <T> List<Class<? extends T>> scanForSubClassesInPackage(String basePackageName, Class<T> parentClass) {
+        ClassFilter subclassOf = ClassFilter.of(aClass -> !parentClass.equals(aClass) && parentClass.isAssignableFrom(aClass));
+        return scanForClassesInPackage(basePackageName, subclassOf)
+            .stream()
+            .map(aClass -> (Class<? extends T> ) aClass.asSubclass(parentClass))
+            .collect(toList());
     }
 
     List<Class<?>> scanForClassesInPackage(String basePackageName, ClassFilter classFilter) {
