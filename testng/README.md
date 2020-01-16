@@ -1,9 +1,7 @@
 Cucumber TestNG 
 ==============
 
-Use TestNG to execute cucumber scenarios.
-
-Add the `cucumber-testng` dependency to your pom.
+Use TestNG to execute cucumber scenarios. To use add the `cucumber-testng` dependency to your pom.
 
 ```xml
 <dependencies>
@@ -21,19 +19,19 @@ Add the `cucumber-testng` dependency to your pom.
 Create an empty class that extends the `AbstractTestNGCucumberTests`.
 
 ```java
-package cucumber.runtime.testng;
+package io.cucumber.runtime.testng;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(plugin = "json:target/cucumber-report.json")
-public class RunCukesTest extends AbstractTestNGCucumberTests {
+public class RunCucumberTest extends AbstractTestNGCucumberTests {
 }
 ```
 
 This will execute all scenarios in same package as the runner, by default glue code is also assumed to be in the same 
 package. The `@CucumberOptions` can be used to provide
-[additional configuration](https://cucumber.io/docs/reference/jvm#list-configuration-options) to the runner. 
+[additional configuration](https://docs.cucumber.io/cucumber/api/#list-configuration-options) to the runner. 
 
 ## Test composition ##
 
@@ -54,7 +52,7 @@ as skipped.
 Cucumber TestNG supports parallel execution of scenarios. Override the `scenarios` method to enable parallel execution.
 
 ```java
-public class RunCukesTest extends AbstractTestNGCucumberTests {
+public class RunCucumberTest extends AbstractTestNGCucumberTests {
 
     @Override
     @DataProvider(parallel = true)
